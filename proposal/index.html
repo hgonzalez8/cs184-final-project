@@ -72,12 +72,83 @@
 		<h2>Schedule</h2>
 		<!--organize and plan the tasks and subtasks that your team will execute.-->
 
+		<style>
+			.styled-table {
+				width: 100%;
+				border-collapse: collapse;
+				font-family: Arial, sans-serif;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+			}
+			.styled-table thead tr {
+				background-color: #009879;
+				color: #ffffff;
+				text-align: left;
+			}
+			.styled-table th, .styled-table td {
+				padding: 12px 15px;
+				border: 1px solid #dddddd;
+			}
+			.styled-table tbody tr:nth-child(even) {
+				background-color: #f3f3f3;
+			}
+			.styled-table tbody tr:hover {
+				background-color: #f1f1f1;
+			}
+			</style>
+
+			<table class="styled-table">
+			<caption>Weekly Schedule</caption>
+			<thead>
+				<tr>
+				<th>Week</th>
+				<th>Project Tasks</th>
+				<th>Due Dates</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1 (4/5 - 4/12)</td>
+					<td>
+						<ul>
+							<li>Read references on volumetric scattering</li>
+							<li>Baseline volumetric renderer</li>
+							<li>Divide responsibilities</li>
+						</ul>
+					</td>
+					<td>Proposal Due 4/7</td>
+				</tr>
+				<tr>
+					<td>2 (4/13-4/17)</td>
+					<td>TBD</td>
+					<td>TBD</td>
+				</tr>
+				<tr>
+					<td>3 (4/20 - 4/24)</td>
+					<td>TBD</td>
+					<td>TBD</td>
+				</tr>
+				<tr>
+					<td>3 (4/20 - 4/24)</td>
+					<td>TBD</td>
+					<td>TBD</td>
+				</tr>
+			</tbody>
+		</table>
+
 		<h2>Resources</h2>
 		<!--List the computing platform, hardware and software resources that you will use for your project.-->
 		<!--If you are starting from an existing piece of code or system, describe and provide a pointer to it here.-->
 		
+		<br>
+
 		<a href="https://cseweb.ucsd.edu/~ravir/papers/singlescat/scattering.pdf">A Practical Analytic Single Scattering Model for Real Time Rendering*</a>
+
+		<br>
+
 		<a href="https://cs.dartmouth.edu/~wjarosz/publications/dissertation/chapter4.pdf">Light Transport in Participating Media</a>
+
+		<br>
+
 		<a href="http://luthuli.cs.uiuc.edu/~daf/courses/rendering/papers/lafortune96rendering.pdf">Rendering Participating Media with Bidirectional Path Tracing</a>
 <!--
 		<ul>
