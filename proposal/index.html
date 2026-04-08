@@ -90,12 +90,19 @@
 			-->
 
 			<p>
-				Ultimately, we plan to deliver a complete implementation and an in-depth explanation of a bidirectional path tracing algorithm, and compare it against the global illumination function from homework 3 across various scenes containing light scattering objects. 
+				Ultimately, we plan to deliver a complete implementation of volumetric scattering and an in-depth explanation of a bidirectional path tracing algorithm, and compare it against the global illumination function from homework 3 across various scenes containing light scattering objects. 
 				In addition to standard surface light transport, we plan to investigate scenes with participating media, where light scatters in a medium before reaching a surface. 
+				We will do this by changing our path tracing algorithm to consider light intersection with particles in the volume between surfaces. 
+				We will adjust our light sampling to interact with particles that absorb the light and distribute it. 
+				The density of particles changes the lighting of surrounding objects according to the Beer-Lambert Law. 
+				Light is also scattered into new directions as a result of particle intersections so we plan to incorporate both these things in our new algorithm.
+			</p>
+			<p>
 				This will allow us to study how BDPT handles complex lighting effects like volumetric scattering in fog-like, smoke-like or illumination environments (e.g. stagelights). 
 				We will evaluate the effects of varying the samples per pixel, number of light rays, bounce depth and accumulations, and other various parameters used to render scenes from the assignment. 
 				We also plan to discuss whether techniques like Russian Roulette or adaptive sampling can improve the rendering times without compromising visual quality. 
 				Our evaluation will focus on visual realism (capturing real-world interaction between light and atmospheric particles), convergence behavior, rendering times, and memory usage across different scenes.
+
 			</p>
 			<p>
 				For this project, we plan to answer whether BDPT provides advantages over standard path tracing for complex scenes. 
