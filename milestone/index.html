@@ -48,11 +48,11 @@
 		<p>
 			So far, we have been researching both volumetric scattering and bidirectional path tracing. 
 			We have been working on implementing volumetric scattering by adjusting the regular path tracer to handle intersections with particles in addition to surfaces. 
-			<br>
+	
 			We used distance sampling as our method to determine the distance along the ray sample that intersects with a particle based on the medium's density. 
 			We are able to sample distances based on the probability of interaction which helps us simulate medium particles in the air. 
 			We use the Beer-Lambert Law for distance sampling since it is able to calculate the distance travelled by the ray in the medium before colliding with a particle.
-			<br>
+
 			We used the Henyey-Greenstein phase function to determine the next direction of the ray after it collides with a particle because it is able to approximate complex light scattering for different scattering media. 
 			When changing the asymmetry parameter of the phase function, we see that the lighting becomes more prominent and glowy when the parameter is greater.  
 		</p>
@@ -73,8 +73,6 @@
 			Currently, the plan now is the move to the BDPT algorithm and begin testing our volumetric scattering methods and BDPT algorithm on large scenes for showcase. 
 			We hope to show Cinematic Renders of more complex scenes, along with analysis of the algorithms we've developed for the project.
 		</p>
-
-		<h2>Schedule</h2>
 		<!--organize and plan the tasks and subtasks that your team will execute.-->
 
 		<style>
@@ -90,7 +88,7 @@
 				text-align: left;
 			}
 			.styled-table th, .styled-table td {
-				padding: 12px 15px;
+				padding: 8px 15px;
 				border: 1px solid #dddddd;
 			}
 			.styled-table tbody tr:nth-child(even) {
@@ -116,13 +114,8 @@
 					<td>
 						<ul>
 							<li>Build the BDPT Algorithm</li>
-							<li>Begin building large Scene(s) Render</li>
-								<ul>Example: A dragon with caustics fog</ul>
+							<li>Begin building large Scene(s) Render (Ex: A dragon with caustics fog)</li>
 							<li>Final report webpage</li>
-							<li>If time permits: </li>
-								<ul>
-									<li>Incorporate Russian Roulette, Adaptive Sampling, or other runtime/memory reduction methods</li>
-								</ul>
 						</ul>
 					</td>
 					<td>Milestone Report Due 4/20</td>
