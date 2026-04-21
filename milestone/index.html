@@ -27,17 +27,137 @@
 	</head>
 	<body>
 		<div class="container">
-		<h1>CS184 Final Project: Milestone Report</h1>
+		<h1>Milestone Report: Comparing Bidirectional and Unidirectional Volumetric Path Tracing For Realistic Light Transport</h1>
 		<div style="text-align: center;">Names: </div>
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">placeholder</a>
+		Link to webpage: <a href="https://hgonzalez8.github.io/cs184-final-project/proposal/index.html">https://hgonzalez8.github.io/cs184-final-project/proposal/index.html</a>
 
 		<br>
 
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">placeholder</a>
+		Link to GitHub repository for webpages: <a href="https://github.com/hgonzalez8/cs184-final-project">https://github.com/hgonzalez8/cs184-final-project</a>
 
+		<br>
+
+		Link to Github repository for Volumetric Scattering: <a href="https://github.com/NohlAaron/cs184-finalproject-sp26">https://github.com/NohlAaron/cs184-finalproject-sp26</a>
+
+
+		<h2>Summary</h2>
+
+		<p>
+			So far, we have been researching both volumetric scattering and bidirectional path tracing. 
+			We have been working on implementing volumetric scattering by adjusting the regular path tracer to handle intersections with particles in addition to surfaces. 
+			<br>
+			We used distance sampling as our method to determine the distance along the ray sample that intersects with a particle based on the medium's density. 
+			We are able to sample distances based on the probability of interaction which helps us simulate medium particles in the air. 
+			We use the Beer-Lambert Law for distance sampling since it is able to calculate the distance travelled by the ray in the medium before colliding with a particle.
+			<br>
+			We used the Henyey-Greenstein phase function to determine the next direction of the ray after it collides with a particle because it is able to approximate complex light scattering for different scattering media. 
+			When changing the asymmetry parameter of the phase function, we see that the lighting becomes more prominent and glowy when the parameter is greater.  
+		</p>
+
+		<h2>Preliminary Results</h2>
+
+		<p>
+			We have been able to render the image of bunny.dae in three different settings. 
+			One with no medium, another with a low density medium, and one with a high density medium. 
+			When modeling how the light interacts with the particles. 
+			We saw that as the density got higher, the lighting appeared dimmer in the scene. 
+			After adding the Henyey-Greenstein phase function and direct lighting, the scene was more visible, the lighting had a glow around it, and we could see the fog throughout the scene.
+		</p>
+
+		<h2>Progress Relative to Plan</h2>
+
+		<p>
+			Currently, the plan now is the move to the BDPT algorithm and begin testing our volumetric scattering methods and BDPT algorithm on large scenes for showcase. 
+			We hope to show Cinematic Renders of more complex scenes, along with analysis of the algorithms we've developed for the project.
+		</p>
+
+		<h2>Schedule</h2>
+		<!--organize and plan the tasks and subtasks that your team will execute.-->
+
+		<style>
+			.styled-table {
+				width: 100%;
+				border-collapse: collapse;
+				font-family: Arial, sans-serif;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+			}
+			.styled-table thead tr {
+				background-color: #009879;
+				color: #ffffff;
+				text-align: left;
+			}
+			.styled-table th, .styled-table td {
+				padding: 12px 15px;
+				border: 1px solid #dddddd;
+			}
+			.styled-table tbody tr:nth-child(even) {
+				background-color: #f3f3f3;
+			}
+			.styled-table tbody tr:hover {
+				background-color: #f1f1f1;
+			}
+			</style>
+
+			<table class="styled-table">
+			<caption>Weekly Schedule</caption>
+			<thead>
+				<tr>
+				<th>Week</th>
+				<th>Project Tasks</th>
+				<th>Due Dates</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>3 <br> (4/20 - 4/24)</td>
+					<td>
+						<ul>
+							<li>Build the BDPT Algorithm</li>
+							<li>Begin building large Scene(s) Render</li>
+								<ul>Example: A dragon with caustics fog</ul>
+							<li>Final report webpage</li>
+							<li>If time permits: </li>
+								<ul>
+									<li>Incorporate Russian Roulette, Adaptive Sampling, or other runtime/memory reduction methods</li>
+								</ul>
+						</ul>
+					</td>
+					<td>Milestone Report Due 4/20</td>
+				</tr>
+				<tr>
+					<td>4 <br> (4/27 - 5/1)</td>
+					<td>
+						<ul>
+							<li>Experiment and debug with different iterations of Large Scene Renders</li>
+							<li>Incorporate Russian Roulette, Adaptive Sampling, or other runtime/memory reduction methods</li>
+							<li>Presentation slides</li>
+							<li>Prepare webpage for submission and presentation</li>
+						</ul>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>5 <br> (5/4 - 5/5)</td>
+					<td>Submit and Present</td>
+					<td>
+						Final Submission Due 5/4
+						<br>
+						<br>
+						Final Presentation 5/5
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<iframe src="https://drive.google.com/file/d/1ddZk3X6HwOLpMIRebOE6ZnERjl4m_E_r/preview" width="640" height="480"></iframe>
+
+		<h2>Milestone Slides</h2>
+		Link to slides <a href="https://docs.google.com/presentation/d/1Py9CFJur7zN7D7dbOfCl7XiE0-0mLoA5UexDTIr8nBI/edit?usp=sharing">Milestone Slides</a>
+
+	<!-- 
 		<h2>Additional Notes (please remove)</h2>
 		<ul>
 			<li>You can also add code if you'd like as so: <code>code code code</code></li>
@@ -48,6 +168,7 @@
 				</ul>
 			</li>
 		</ul>
+	-->
 		</div>
 	</body>
 </html>
