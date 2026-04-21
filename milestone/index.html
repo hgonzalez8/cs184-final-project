@@ -46,6 +46,7 @@
 		<h2>Summary</h2>
 
 		<p>
+		<!--
 			So far, we have been researching both volumetric scattering and bidirectional path tracing. 
 			We have been working on implementing volumetric scattering by adjusting the regular path tracer to handle intersections with particles in addition to surfaces. 
 	
@@ -55,6 +56,11 @@
 
 			We used the Henyey-Greenstein phase function to determine the next direction of the ray after it collides with a particle because it is able to approximate complex light scattering for different scattering media. 
 			When changing the asymmetry parameter of the phase function, we see that the lighting becomes more prominent and glowy when the parameter is greater.  
+		-->
+			So far, we focused on implementing a functioning volumetric scattering method for our pathtracer. 
+			We used distance sampling as our method to determine the distance along the ray sample that intersects with a particle based on the medium's density (i.e, the probability of interaction). 
+			We use the Beer-Lambert Law for distance sampling, which calculates the distance travelled by the ray in the medium before colliding with a particle. 
+			After distance sampling, we used the Henyey-Greenstein phase function to determine the next direction of the ray after it collides with a particle because it is able to approximate complex light scattering for different scattering media.
 		</p>
 
 		<h2>Preliminary Results</h2>
