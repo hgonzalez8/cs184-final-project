@@ -137,7 +137,82 @@
 		This allows us to efficiently calculate light, but the tradeoff is being unable to show heterogeneous changes.
 		<a href="https://cseweb.ucsd.edu/classes/sp17/cse168-a/CSE168_14_Volumetric.pdf">https://cseweb.ucsd.edu/classes/sp17/cse168-a/CSE168_14_Volumetric.pdf</a>
 
+		<h3>Bidirectional Path Tracing Approach</h3>
+		The main focus of our project is to make an analysis between Unidirectional and Bidirectional Path Tracing in rendering with Volumetric Scattering. 
+		We shoot two rays one starting from the camera and the other from a light source and create vertices at the points they register an intersection at. 
+		We try to connect the vertices to each other from both rays and if unblocked a valid light path is created. With the inclusion of a medium in the scene this creates an extremely large number of positions in which light can reflect and scatter. 
+		This makes it a lot harder for rays to bounce and intersect with a light source before terminating. 
+		<a href="https://cs.dartmouth.edu/~wjarosz/publications/georgiev13joint-small.pdf">https://cs.dartmouth.edu/~wjarosz/publications/georgiev13joint-small.pdf</a>
 
+		<h3>Path Vertex Struct</h3>
+		The BDPT stores its paths as vectors of a special vertex struct. 
+		This is the core building block of the following functions for the BDPT, and stores the following information for constructing medium vertices, surface vertices, and light-source vertices.
+		A vertex represents a point along a BDPT path and will store information about its world-space position, surface normal (if applicable), accumulated path throughput, and direction towards the previous vertex. 
+		It will also track:
+		<ul>
+			<li>Whether the vertex is -- a volume scattering event or emissive</li>
+			<li>Surface material pointer</li>
+			<li>Whether the interaction is specular/delta</li>
+			<li>placeholders for path probability bookkeeping (pdfFwd, pdfBwd)</li>
+		</ul>
+
+		<h3>Camera Subpathing</h3>
+		To generate camera subpaths, we take the input camera ray and repeatedly sample either a medium scattering event or a surface hit. 
+		For each detected bounce, it will intersect the ray with the BVH and sample a medium distance. 
+		If the medium event occurs before the surface hit, it will create a medium vertex and sample a new phase-function direction. 
+		Otherwise, it will create a surface vertex, sample the BSDF, update throughput, and continue.
+
+		<h3>Light Subpathing</h3>
+		For generating light subpaths, it will randomly select one scene light and parse that through a sampling function that handles point lights, area light, infinite hemisphere lights, directional lights, and spotlights. 
+		The sampled light creates an initial light-source vertex, then traces forward similarly to the camera subpath. At each bounce, it may also add either a medium or surface vertex, but will also update the throughput.
+
+		<h3>Connecting Vertices</h3>
+		Afterwards, we will connect all surface vertices together. 
+		It will search for a pair of non-specular, non light, non-medium surface vertices and compute the direction of the light-side vertex to the camera-side vertex to check whether they are visible to each other. 
+		If visible, it will draw a shadow ray between them and return the medium transmittance along the segment.
+
+		<h3>Problems Encountered</h3>
+		A problem we encountered were noisy images during the initial testing of our BDPT algorithm. 
+		The original BDPT applied an arbitrary brightness scale to its returned contribution term, which would produce unstable image brightness in scenes. 
+		It also does not account for how likely each path construction strategy was, leading to scenes with fairly unrealistic lighting.
+		<br>
+		One idea we had was to mitigate this issue was to replace the arbitrary brightness term with Multiple Importance Sampling (MIS), 
+		which assigns each sampling strategy a fraction of the contribution based on its probability of generating the same transport path: \( weight = current_strategy_pdf / sum(all_strategy_pdfs) \).
+		This was intended to reduce overcounting between different BDPT connection strategies and downweight poor sampling strategies, improving variance compared to a fixed manual scale.
+		<br>
+		Another issue was using the BDPT alongside the Volumetric Scatterer. 
+		The original BDPT hardcodes its surface-to-surface geometry term:  \( G = cosL * cosC / distance<sup>2</sup> \)
+
+
+		<h3>Lessons Learned</h3>
+		We learned how to realistically simulate light transport through a medium using various methods to sample and distribute light. 
+		Through this we gained a better understanding of how light rays are scattered and how we could manipulate them to add caustics such as fog, haze, and dust.
+
+		<h3>Results</h3>
+
+
+		<h3>References</h3>
+		<ul>
+			<li>https://www.astro.uvic.ca/~tatum/stellatm/atm5.pdf</li>
+			<li>https://pages.mtu.edu/~scarn/teaching/GE4250/transmission_lecture.pdf</li>
+			<li>https://www.oceanopticsbook.info/view/scattering/level-2/the-henyey-greenstein-phase-function</li>
+			<li>https://cseweb.ucsd.edu/classes/sp17/cse168-a/CSE168_14_Volumetric.pdf</li>
+			<li>https://cs.dartmouth.edu/~wjarosz/publications/georgiev13joint-small.pdf</li>
+			<li>https://graphics.stanford.edu/courses/cs348b-03/papers/veach-chapter10.pdf</li>
+		</ul>
+
+		<h3>Contributions</h3>
+		<ul>
+			<li>Nohl: worked with Jaewon on implementing BDPT. Mapped out the structure of codebase</li>
+			<li>Jaewon: worked with Nohl on implementing BDPT. Worked on BDPT connecting the light and camera subpaths</li>
+			<li>Heidy: worked with Brendan on implementing volumetric scattering. Worked on BDPT light subpath</li>
+			<li>Brendan: worked with Heidy to implement volumetric scattering. Worked on BDPT camera subpath.</li>
+		</ul>
+
+		All team members were actively involved in assisting during the debugging process (for BDPT in particular) and reviewing each others' code, as it took a long time to get the implementation remotely working. 
+		We had weekly meetings as a group to ensure that we were on track with schedule regarding what we had planned (during our initial proposal and milestone report). 
+		Here, we discussed what we felt was the highest priority task to take on, and also divided up the work evenly amongst ourselves. 
+		The above bullet points indicate just rough pointers for certain key contributions each member had, but there were a lot of collaborative efforts overall.
 
 	<!--
 		<h2>Additional Notes (please remove)</h2>
