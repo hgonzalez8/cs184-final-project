@@ -180,7 +180,7 @@
 		which assigns each sampling strategy a fraction of the contribution based on its probability of generating the same transport path: 
 		<br>
 		<!--var>weight</var> = <var>current_strategy_pdf</var> / sum(<var>all_strategy_pdfs</var>).-->
-		\( \text{weight} = \frac{\text{current\_strategy\_pdf}}{\sum \text{all\_strategy\_pdfs}} \)
+		\( \text{weight} = \frac{\text{current_strategy_pdf}}{\sum \text{all_strategy_pdfs}} \)
 		This was intended to reduce overcounting between different BDPT connection strategies and downweight poor sampling strategies, improving variance compared to a fixed manual scale.
 		<br>
 		Another issue was using the BDPT alongside the Volumetric Scatterer. 
