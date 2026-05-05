@@ -27,17 +27,73 @@
 	</head>
 	<body>
 		<div class="container">
-		<h1>CS184 Final Project: Final Report</h1>
-		<div style="text-align: center;">Names: </div>
+		<h1>Bidirectional and Unidirectional Volumetric Path Tracing For Realistic Light Transport</h1>
+		<div style="text-align: center;">Names: Nohl Abdelhadi, Jaewon Chang, Heidy Gonzalez, Brendan Reyes</div>
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">placeholder</a>
+		Link to webpage: <a href="https://hgonzalez8.github.io/cs184-final-project/proposal/index.html">https://hgonzalez8.github.io/cs184-final-project/proposal/index.html</a>
 
 		<br>
 
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">placeholder</a>
+		Link to GitHub repository for webpages: <a href="https://github.com/hgonzalez8/cs184-final-project">https://github.com/hgonzalez8/cs184-final-project</a>
 
+		<br>
+
+		Link to Github repository for Volumetric Scattering: <a href="https://github.com/NohlAaron/cs184-finalproject-sp26">https://github.com/NohlAaron/cs184-finalproject-sp26</a>
+
+
+		<h2>Summary</h2>
+
+		For the Final Project for CS184, our group wanted to extend upon the illumination and raytracing methods built previously in Homework 3. 
+		This project centers around using the pathtracer from homework 3, and implementing 2 different light transport features: A Volumetric Scattering algorithm and a Bidirectional Path Tracer (BDPT). 
+		The volumetric system adds a participating medium model that supports absorption, scattering, transmittance, anisotropic phase functions, and direct lighting from scattering events inside fog or haze. 
+		The Bidirectional path tracing pipeline builds paths from both the camera and the light, connects compatible vertices, and uses multiple importance sampling weights to combine different light transport strategies. 
+		These additions expand the renderer from surface-only global illumination toward more realistic and expressive light transport, including fog, beams of light, reflective caustic-like effects, colored illumination, and atmospheric scattering.
+
+		<h2>Technical Approach</h2>
+
+		<h3>Volumetric Scattering</h3>
+		In a basic volumetric scattering algorithm, we sample a ray of light by starting from the camera, and calculating the probability of intersecting with medium before hitting a surface. 
+		If it hits a particle we use the medium's properties to determine the scattering of the light and how much light gets absorbed along the way. 
+		We also calculate the amount of light that passes through to surfaces or reflected, and to terminate rays over many bounces. 
+		These changes change the amount of light that reaches the camera as well as the distribution of the light across a scene.
+
+		<h3>Medium Struct</h3>
+		The first thing we implemented was a medium struct that defined the properties of the medium between surfaces. 
+		Our Medium Struct uses different coefficients for absorption, scattering, and extinction. 
+		These properties define how likely light is to intersect with particles, how they scatter, and the amount of light that gets absorbed.
+		<br>
+		<a href="https://www.astro.uvic.ca/~tatum/stellatm/atm5.pdf">https://www.astro.uvic.ca/~tatum/stellatm/atm5.pdf</a>
+
+		<h3>Beer-Lambert Law</h3>
+		We use the Beer-Lambert Law to determine Transmittance, the amount of light that passes through a medium, based on the extinction coefficient. 
+		This affects the intensity of the medium and how clear surrounding objects can be seen.
+		<br>
+		<a href="https://pages.mtu.edu/~scarn/teaching/GE4250/transmission_lecture.pdf">https://pages.mtu.edu/~scarn/teaching/GE4250/transmission_lecture.pdf</a>
+
+		<h3>Distance Sampling</h3>
+		We adjusted the sampling by using a cumulative density function based on the extinction coefficient to determine how likely a ray would intersect with the medium. 
+		If the distance returned by this function was greater than the distance to a surface then it does not intersect with the medium.
+
+		<h3>Albedo</h3>
+		We use an albedo function which uses the scattering and extinction coefficients as the probability of an extinction event, when the ray is no longer scattered.
+
+		<h3>Henyey-Greenstein Phase Function</h3>
+		One improvement to standard volumetric scattering we implemented was a Henyey-Greenstein Phase Function. 
+		Real light scattering is non-uniform, and we simulate this by calculating the probability distribution of light scatter from an incoming angle to an outgoing angle.
+		<br>
+		<a href="https://www.oceanopticsbook.info/view/scattering/level-2/the-henyey-greenstein-phase-function">https://www.oceanopticsbook.info/view/scattering/level-2/the-henyey-greenstein-phase-function</a>
+
+		<h3>Other Approaches</h3>
+		In this source, they use a concept called Ray Marching which approximates and accumulates the light changes caused by particles. 
+		Instead, we use a CDF in our distance sampling function to quickly calculate this change based on the distance sampled and the coefficients of the medium. 
+		This allows us to efficiently calculate light, but the tradeoff is being unable to show heterogeneous changes.
+		<a href="https://cseweb.ucsd.edu/classes/sp17/cse168-a/CSE168_14_Volumetric.pdf">https://cseweb.ucsd.edu/classes/sp17/cse168-a/CSE168_14_Volumetric.pdf</a>
+
+
+
+	<!--
 		<h2>Additional Notes (please remove)</h2>
 		<ul>
 			<li>You can also add code if you'd like as so: <code>code code code</code></li>
@@ -48,6 +104,7 @@
 				</ul>
 			</li>
 		</ul>
+	-->
 		</div>
 	</body>
 </html>
